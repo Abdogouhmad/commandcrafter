@@ -1,0 +1,17 @@
+[package]
+name = "commandcrafter"
+version = "0.2.0"
+edition = "2021"
+description = "This crate is used to execute shell commands using rust convenience"
+license = "MIT"
+repository = "https://github.com/div-styl/commandcrafter"
+readme = "README.md"
+documentation = "https://docs.rs/commandcrafter"
+homepage = "https://github.com/div-styl/commandcrafter"
+keywords = ["execute", "command", "shell", "rust", "convenience", "execute-command"]
+authors = ["div-styl <https://github.com/div-styl>"]
+categories = ["development-tools", "command-line-utilities"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
