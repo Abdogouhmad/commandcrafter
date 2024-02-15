@@ -8,7 +8,7 @@ repository = "https://github.com/div-styl/commandcrafter"
 readme = "README.md"
 documentation = "https://docs.rs/commandcrafter"
 homepage = "https://github.com/div-styl/commandcrafter"
-keywords = ["execute", "command", "shell", "rust", "convenience", "execute-command"]
+keywords = ["command", "shell", "execute-command", "Command" ]
 authors = ["div-styl <https://github.com/div-styl>"]
 categories = ["development-tools", "command-line-utilities"]
 
