@@ -7,6 +7,7 @@ CommandCrafter is a Rust crate designed to simplify interaction with the console
 - Execute commands from within Rust programs.
 - Capture command output.
 - Write command output to a file for logging and analysis.
+- Display the output command in the terminal.
 - Simplify automation tasks by leveraging Rust's capabilities.
 
 ## Installation
