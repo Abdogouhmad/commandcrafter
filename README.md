@@ -14,9 +14,8 @@ CommandCrafter is a Rust crate designed to simplify interaction with the console
 
 Add this crate to your `Cargo.toml` file:
 
-```toml
-[dependencies]
-commandcrafter = "0.1.0"
+```bash
+cargo add commandcrafter
 ```
 
 ## Usage
