@@ -45,15 +45,29 @@ impl Execute {
         }
     }
 
+    /// format method is used to display the output in the console
+    /// it will be used only when we want to display the output in the console
+    /// # Example
+    /// ```rust
+    /// use commandcrafter::Execute;
+    /// let output = Execute::new("du", &["-h", "--max-depth=1", "."]);
+    /// Execute::into_console(&output);
+    /// ```
+    #[allow(dead_code)]
+    pub fn into_console(output: &Vec<u8>) {
+        let formatting = format!("{}", String::from_utf8_lossy(output));
+        println!("{}", formatting);
+    }
+
     /// # Example
     ///```
     /// use commandcrafter::Execute;
-    /// 
+    ///
     /// fn main() {
     ///     let output1 = Execute::new("ls", &["-ll"]);
     ///    let output2 = Execute::new("du", &["-h", "--max-depth=1", "."]);
     ///    // combine the outputs into one file
-    ///   let combineoutput = &[output1, output2].concat(); 
+    ///   let combineoutput = &[output1, output2].concat();
     ///   Execute::write_to_file(&combineoutput);
     /// }
     /// ```
@@ -70,10 +84,7 @@ impl Execute {
     pub fn check_operation(op: &std::io::Result<()>) -> bool {
         match op {
             Ok(_) => {
-                println!(
-                    "File created successfully in {}.",
-                    FILE_NAME
-                );
+                println!("File created successfully in {}.", FILE_NAME);
                 true
             }
             Err(_) => {
