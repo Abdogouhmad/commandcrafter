@@ -49,9 +49,12 @@ impl Execute {
         }
     }
 
-    /// format method is used to display the output in the console
-    /// it will be used only when we want to display the output in the console
-    /// # Example
+    /// `print_into_console` Display the output into the console
+    /// # Arguments
+    /// * `output` - the output of the command (could be combination of commands) of type array of unsigned 8-bit
+    /// # Returns
+    /// None so far except for printing the output into the console    
+    /// ## Example
     /// ```rust
     /// use commandcrafter::execute::Execute;
     /// let out = Execute::run("ls", &["-l"]);
@@ -63,6 +66,13 @@ impl Execute {
         let formatting = format!("{}", String::from_utf8_lossy(output));
         println!("{}", formatting);
     }
+
+
+    /// `write_to_file` Write the output into the file
+    /// # Arguments
+    /// * `output` - the output of the command (could be combination of commands) of type array of unsigned 8-bit
+    /// # Returns
+    /// * `std::io::Result<()>`  the result of the command wrote into file named **ExecuteLog.lg**
     /// # Example
     ///```rust
     /// use commandcrafter::execute::Execute;
@@ -77,8 +87,21 @@ impl Execute {
         Ok(())
     }
 
-    /// this module comes to check the existence of the file: `ExecuteLog.log`
-    /// as the existence of the file will show us that the command is executed successfully
+    /// `check_operation` Check the operation of the file
+    /// # Arguments
+    /// * `op` - the result of file creation
+    /// # Returns
+    /// * `true` if the file is created successfully
+    /// * `panic` if the file is not created successfully
+    /// ##  Example
+    /// ```rust
+    /// use commandcrafter::execute::Execute;
+    /// let out = Execute::run("ls", &["-l"]);
+    /// let out1 = Execute::run("ping", &["-c", "5", "8.8.8.8"]);
+    /// let cmb = &[out, out1].concat();
+    /// let res = Execute::write_to_file(cmb);
+    /// Execute::check_operation(&res);
+    /// ```
     pub fn check_operation(op: &std::io::Result<()>) -> bool {
         match op {
             Ok(_) => {
