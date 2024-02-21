@@ -24,7 +24,7 @@ impl Execute {
     /// ```rust
     /// use commandcrafter::execute::Execute;
     /// let output = Execute::run("du", &["-h", "--max-depth=1", "."]);
-    /// println!("{}", String::from_utf8_lossy(&output));
+    /// print_into_console(&output);
     /// ```
     pub fn run(command: &str, arguments: &[&str]) -> Vec<u8> {
         // execute the command and return the output
