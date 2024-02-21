@@ -9,7 +9,8 @@ CommandCrafter is a Rust crate designed to simplify interaction with the console
 - Write command output to a file for logging and analysis.
 - Display the output command in the terminal.
 - Simplify automation tasks by leveraging Rust's capabilities.
-
+- storing the output in a file within log folder in desktop.
+- the processing now is colorized for easy reading.
 ## Installation
 
 Add this crate to your `Cargo.toml` file:
@@ -21,18 +22,15 @@ cargo add commandcrafter
 ## Usage
 
 ```rust
-use commandcrafter::Execute;
+use commandcrafter::execute::Execute;
 
 fn main() {
-    // Execute a command and capture its output
-    let output = Execute::new("du", &["-h", "--max-depth=1", "."]);
-    
-    // Write output to a file
-    Execute::write_to_file(&output);
+    let output = Execute::run("du", &["-h", "--max-depth=1", "."]);
+    print_into_console(&output);
 }
 ```
 
-for more Usage check [docs](https://docs.rs/commandcrafter/)
+for more Usage check [docs](https://docs.rs/commandcrafter/0.2.2/commandcrafter/)
 
 ## Contributing
 
