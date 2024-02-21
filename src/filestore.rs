@@ -13,7 +13,7 @@ use std::env;
 use std::fs;
 use std::io::Write;
 
-/// struct for filestore;
+/// struct for filestore implementation
 pub struct Filestore;
 
 impl Filestore {
@@ -25,12 +25,12 @@ impl Filestore {
     /// # Example
     ///```rust
     /// use commandcrafter::execute::Execute;
-    /// use commandcrafter::filestore::write_into_desktop;
+    /// use commandcrafter::filestore::Filestore;
     ///
     /// let out = Execute::run("ls", &["-l"]);
     /// let out1 = Execute::run("ping", &["-c", "5", "8.8.8.8"]);
     /// let cmb = &[out, out1].concat();
-    /// write_into_desktop(&cmb).unwrap();
+    /// Filestore::write_into_desktop(&cmb).unwrap();
     /// ```
     pub fn write_into_desktop(content: &[u8]) -> std::io::Result<()> {
         // TODO: create a folder within desktop
