@@ -8,6 +8,8 @@
 use std::fs::File;
 use std::io::Write;
 use std::process::{Command, Stdio};
+
+
 pub struct Execute;
 /// this const is intended to hold the name of the file where we will store our output
 const FILE_NAME: &str = "ExecuteLog.lg";
@@ -67,7 +69,6 @@ impl Execute {
         println!("{}", formatting);
     }
 
-
     /// `write_to_file` Write the output into the file
     /// # Arguments
     /// * `output` - the output of the command (could be combination of commands) of type array of unsigned 8-bit
@@ -105,6 +106,7 @@ impl Execute {
     pub fn check_operation(op: &std::io::Result<()>) -> bool {
         match op {
             Ok(_) => {
+                // println!("File created successfully in {}.", FILE_NAME);
                 println!("File created successfully in {}.", FILE_NAME);
                 true
             }
@@ -113,5 +115,4 @@ impl Execute {
             }
         }
     }
-
 }

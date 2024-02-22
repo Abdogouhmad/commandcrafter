@@ -9,10 +9,10 @@
 //! - store the file inside a folder (usually the home/Desktop directory)
 //! - combine multiple outputs into one file
 //! - the ability to delete the file (optional)
+use crate::color::Col;
 use std::env;
 use std::fs;
 use std::io::Write;
-
 /// struct for filestore implementation
 pub struct Filestore;
 
@@ -33,26 +33,31 @@ impl Filestore {
     /// Filestore::write_into_desktop(&cmb).unwrap();
     /// ```
     pub fn write_into_desktop(content: &[u8]) -> std::io::Result<()> {
-        // TODO: create a folder within desktop
-        // TODO: check if the folder exists if so then start creating file log
-        // TODO: if the file didn't exist then create it
-        // TODO: if the process failed due to the command status code exist the store the error within the file.
-        // TODO: if the exist=0 then create and print a colored output (should be green at least)
-
         let log_folder = env::var("HOME").unwrap() + "/Desktop/logs";
         // Create the folder
         match fs::create_dir_all(&log_folder) {
             Ok(_) => {
-                println!("The folder was created successfully");
+                println!(
+                    "{}",
+                    Col::print_col(&Col::Green, "The folder was created successfully")
+                );
                 let file_log = log_folder + "/ExecuteLog.lg";
                 let fl = fs::File::create(&file_log);
                 match fl {
                     Ok(mut f) => {
-                        println!("The file was created successfully");
+                        println!(
+                            "{}: {}",
+                            Col::print_col(&Col::Green, "The file log was created successfully with in"),
+                            file_log
+                        );
                         f.write_all(content)?;
                     }
                     Err(e) => {
-                        println!("Couldn't create the file: {}", e);
+                        println!(
+                            "{}: {}",
+                            Col::print_col(&Col::Red, "The file couldn't be created"),
+                            e
+                        );
                     }
                 }
             }
