@@ -9,7 +9,6 @@ use std::fs::File;
 use std::io::Write;
 use std::process::{Command, Stdio};
 
-
 pub struct Execute;
 /// this const is intended to hold the name of the file where we will store our output
 const FILE_NAME: &str = "ExecuteLog.lg";
