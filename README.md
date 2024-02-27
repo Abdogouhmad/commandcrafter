@@ -30,11 +30,11 @@ use commandcrafter::execute::Execute;
 
 fn main() {
     let output = Execute::run("du", &["-h", "--max-depth=1", "."]);
-    print_into_console(&output);
+    Execute::print_into_console(output);
 }
 ```
 
-for more Usage check [docs](https://docs.rs/commandcrafter/0.2.2/commandcrafter/)
+for more Usage check [docs](https://docs.rs/commandcrafter/0.3.2/commandcrafter/)
 
 ## Contributing
 
