@@ -12,7 +12,7 @@ CommandCrafter is a Rust crate designed to simplify interaction with the console
 - Store the output in a file within the log folder on the desktop.
 - The processing now is colorized for easy reading.
 - The progress of program running displayed in a colorized way.
-
+- log the output with folder log in Desktop with spacific `/filename.log`
 ## Installation
 
 Add this crate to your `Cargo.toml` file:

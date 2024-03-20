@@ -24,9 +24,11 @@ impl Filestore {
     ///
     /// # Arguments
     ///
-    /// * `content` - The output of the command as a `Result<Vec<u8>, String>`.
-    ///               If the result is `Ok`, it contains the output data as a vector of unsigned 8-bit integers (bytes).
-    ///               If the result is `Err`, it contains the error message as a string.
+    /// * `content`:   The output of the command as a `Result<Vec<u8>, String>`.
+    ///                If the result is `Ok`, it contains the output data as a vector of unsigned 8-bit integers (bytes).
+    ///                If the result is `Err`, it contains the error message as a string.
+    /// * `filename`:  The name of the file log that holds the output of single command the name should be str type
+    ///                the name of file log should follow this pattern `/filename.log`
     ///
     /// # Returns
     ///
@@ -38,9 +40,12 @@ impl Filestore {
     /// use commandcrafter::filestore::Filestore;
     ///
     /// let out = Execute::run("ls", &["-l"]);
-    /// Filestore::write_into_desktop(&out).unwrap();
+    /// Filestore::write_into_desktop(&out, "/lscmd.log").unwrap();
     /// ```
-    pub fn write_into_desktop(content: &Result<Vec<u8>, String>) -> std::io::Result<()> {
+    pub fn write_into_desktop(
+        content: &Result<Vec<u8>, String>,
+        filename: &str,
+    ) -> std::io::Result<()> {
         let log_folder = env::var("HOME").unwrap() + "/Desktop/logs";
         // Create the folder
         match fs::create_dir_all(&log_folder) {
@@ -49,7 +54,7 @@ impl Filestore {
                     "{}",
                     Col::print_col(&Col::Green, "The folder was created successfully")
                 );
-                let file_log = log_folder + "/ExecuteLog.log";
+                let file_log = log_folder + filename;
                 let fl = fs::File::create(&file_log);
                 match fl {
                     Ok(mut f) => {
