@@ -37,7 +37,7 @@ impl Execute {
     ///
     /// # Errors
     ///
-    /// This function will return a `Result<()>` that contains an error if the command fails to execute.
+    /// This function will return a `Result<(), std::io::Error>` that contains an error if the command fails to execute.
     pub fn exe(command: &str, arguments: &[&str]) -> Result<(), std::io::Error> {
         let output = Command::new(command)
             .args(arguments)
