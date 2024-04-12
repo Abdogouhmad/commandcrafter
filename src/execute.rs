@@ -32,7 +32,7 @@ impl Execute {
     /// ```
     /// use commandcrafter::execute::Execute;
     ///
-    /// Execute::exe("echo", &["hello", "world"]).unwrap
+    /// Execute::exe("echo", &["hello", "world"]).unwrap();
     /// ```
     ///
     /// # Errors
