@@ -14,6 +14,44 @@ pub struct Execute;
 const FILE_NAME: &str = "ExecuteLog.log";
 /// Implement the **Execute struct**
 impl Execute {
+    /// Executes a shell command with the specified arguments.
+    ///
+    /// This function takes a command as a string and a slice of arguments, spawns the command,
+    /// and inherits the standard output (stdout) to preserve any colors or formatting in the output.
+    ///
+    /// If the command fails to execute, an error message will be printed to the standard error (stderr)
+    /// and the process will exit with a non-zero status code.
+    ///
+    /// # Arguments
+    ///
+    /// * `command` - A string representing the command to be executed.
+    /// * `arguments` - A slice of strings representing the arguments to pass to the command.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use commandcrafter::execute::Execute;
+    ///
+    /// Execute::exe("echo", &["hello", "world"]).unwrap
+    /// ```
+    ///
+    /// # Errors
+    ///
+    /// This function will return a `Result<()>` that contains an error if the command fails to execute.
+    pub fn exe(command: &str, arguments: &[&str]) -> Result<(), std::io::Error> {
+        let output = Command::new(command)
+            .args(arguments)
+            .stdout(Stdio::inherit())
+            .spawn();
+        match output {
+            Ok(_) => {}
+            Err(e) => {
+                eprintln!("Command \'{}\' can't be executed: {}", command, e);
+                std::process::exit(1)
+            }
+        }
+        Ok(())
+    }
     /// # Execute::run;
     /// this method is used to execute the command and return the output
     /// ## Arguments
