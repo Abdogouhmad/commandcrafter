@@ -1,4 +1,4 @@
-#![allow(dead_code)]
+// #![allow(dead_code)]
 //! # Execute module
 //! The rationale behind creating this crate, is to make life easier
 //! for Rust developers when it comes to interacting with your console. Additionally,
@@ -42,15 +42,39 @@ impl Execute {
         let output = Command::new(command)
             .args(arguments)
             .stdout(Stdio::inherit())
-            .spawn();
-        match output {
-            Ok(_) => {}
-            Err(e) => {
-                eprintln!("Command \'{}\' can't be executed: {}", command, e);
-                std::process::exit(1)
-            }
-        }
+            .stderr(Stdio::piped())
+            .spawn()
+            .map_err(|e| {
+                std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    format!("failed to execute cmd '{}': {}", command, e),
+                )
+            })?;
+        let _ = output.wait_with_output().map_err(|err| {
+            std::io::Error::new(
+                std::io::ErrorKind::Other,
+                format!("Failed to wait for command '{}': {}", command, err),
+            )
+        });
+
         Ok(())
+        // let _ = output.wait_with_output().map_err(|err| {
+        //     std::io::Error::new(
+        //         std::io::ErrorKind::Other,
+        //         format!("Failed to wait for command '{}': {}", command, err),
+        //     )
+        // });
+        // let output = Command::new(command)
+        //     .args(arguments)
+        //     .stdout(Stdio::inherit())
+        //     .spawn();
+        // match rs {
+        //     Ok(_) => {}
+        //     Err(e) => {
+        //         eprintln!("Command \'{}\' can't be executed: {}", command, e);
+        //         std::process::exit(1)
+        //     }
+        // }
     }
     /// # Execute::run;
     /// this method is used to execute the command and return the output
